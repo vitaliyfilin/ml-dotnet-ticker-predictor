@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 using TickerPredictor.Extensions;
 using TickerPredictor.Helpers;
 using TickerPredictor.Services;
@@ -30,8 +29,7 @@ internal class Program
             .BuildServiceProvider();
 
         var tickerPredictor = serviceProvider.GetService<ITickerPredictor>();
-        var logger = serviceProvider.GetService<ILogger<Program>>();
-
+        
         var trainingData = CsvDataHelper.GetTrainingData(DataSetLocation);
 
         await tickerPredictor.TrainAsync(trainingData, ModelPath);

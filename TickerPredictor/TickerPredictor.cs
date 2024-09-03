@@ -32,7 +32,7 @@ public sealed class TickerPredictor : ITickerPredictor
                 .Append(_mlContext.MulticlassClassification.Trainers.SdcaMaximumEntropy("Label", "Features"))
                 .Append(_mlContext.Transforms.Conversion.MapKeyToValue("PredictedTicker", "PredictedLabel"));
 
-            var testFraction = _configuration.GetValue<double>("TestFraction", 0.2);
+            var testFraction = _configuration.GetValue("TestFraction", 0.2);
             var trainTestSplit = _mlContext.Data.TrainTestSplit(data, testFraction);
 
             _logger?.LogInformation("Fitting the model.");
@@ -58,15 +58,16 @@ public sealed class TickerPredictor : ITickerPredictor
         }
     }
 
-    public async Task<string> PredictAsync(string stockName, string modelPath)
+    public async Task<StockPrediction> PredictAsync(string stockName, string modelPath)
     {
+        if (string.IsNullOrEmpty(stockName)) return null;
         try
         {
             _logger?.LogInformation($"Loading model from {modelPath}.");
             ITransformer model;
             await using (var stream = new FileStream(modelPath, FileMode.Open, FileAccess.Read, FileShare.Read))
             {
-                model = _mlContext.Model.Load(stream, out var modelInputSchema);
+                model = _mlContext.Model.Load(stream, out _);
             }
 
             var predictionEngine = _mlContext.Model.CreatePredictionEngine<StockData, StockPrediction>(model);
@@ -76,7 +77,7 @@ public sealed class TickerPredictor : ITickerPredictor
 
             _logger?.LogInformation($"Prediction completed: {stockName} => {prediction.PredictedTicker}");
 
-            return prediction.PredictedTicker;
+            return prediction;
         }
         catch (Exception ex)
         {
@@ -94,7 +95,7 @@ public sealed class TickerPredictor : ITickerPredictor
             ITransformer model;
             await using (var stream = new FileStream(modelPath, FileMode.Open, FileAccess.Read, FileShare.Read))
             {
-                model = _mlContext.Model.Load(stream, out var modelInputSchema);
+                model = _mlContext.Model.Load(stream, out _);
             }
 
             var predictions = new List<StockPrediction>();
