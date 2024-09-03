@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TickerPredictor", "TickerPredictor\TickerPredictor.csproj", "{AEE4320A-6DA7-4D0B-A067-FB442E16047F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TickerPredictorTests", "TickerPredictorTests\TickerPredictorTests.csproj", "{97992ECA-0F80-4F67-B739-F87376A19E64}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AEE4320A-6DA7-4D0B-A067-FB442E16047F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AEE4320A-6DA7-4D0B-A067-FB442E16047F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AEE4320A-6DA7-4D0B-A067-FB442E16047F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AEE4320A-6DA7-4D0B-A067-FB442E16047F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{97992ECA-0F80-4F67-B739-F87376A19E64}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97992ECA-0F80-4F67-B739-F87376A19E64}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97992ECA-0F80-4F67-B739-F87376A19E64}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{97992ECA-0F80-4F67-B739-F87376A19E64}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
